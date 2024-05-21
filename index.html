@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #slide {
+            width: 60%;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+    </style>
+</head>
+
+<body>
+
+  <h3>Slide show</h3>
+    <div id="slide">
+        <button onclick="prevfn()"> < </button>
+           
+                <div id="cont"> </div>
+                <button onclick="nextfn()"> > </button>
+    </div>
+    <button onclick="stopfn()">STOP Slide</button>
+    <button onclick="startfn()">START Slide</button>
+
+
+    <script>
+        let arr = [
+            "https://images.unsplash.com/photo-1714837003223-5144b6e082cb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8fA%3D%3D",
+            "https://images.unsplash.com/photo-1715540994066-7d3402b3dbb6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1NHx8fGVufDB8fHx8fA%3D%3D",
+            "https://images.unsplash.com/photo-1716136716704-7d5f7bbb6de4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw2OHx8fGVufDB8fHx8fA%3D%3D",
+            "https://images.unsplash.com/photo-1716050866907-05f17aa6deda?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5MXx8fGVufDB8fHx8fA%3D%3D"
+
+
+        ]
+        function displayimage(val) {
+            let cont = document.getElementById("cont");
+            cont.innerHTML = "";
+            let img = document.createElement("img");
+            img.src = arr[val];
+            cont.append(img);
+
+        }
+        let i = 2;
+        displayimage(i);
+
+        //on load to slideshw should start automatically
+        //image shuold to change after 2 second
+        //settimeout, steinterval
+        //steinteval is should be used
+      let id;
+       function startslide(){
+        console.log("id before start", id)
+         if(id==undefined){
+            id = setInterval(() => {
+            i++
+            if (i == arr.length) {
+                i = 0
+            }
+            displayimage(i);
+
+        }, 2000)
+
+         }
+       }
+
+        function stopfn(){
+            console.log("stopped")
+            clearInterval(id)
+
+        }
+
+        function startfn(){
+         //   window.location.reload()
+         startslide();
+        }
+
+
+
+
+        function prevfn() {
+            i--;
+            if (i < 0) {
+                i = arr.length - 1
+            }
+
+            displayimage(i);
+        }
+
+        function nextfn() {
+            console.log("clicked");
+            i++;
+            if (i == arr.length) {
+                i = 0
+            }
+
+            displayimage(i);
+        }
+
+
+    </script>
+
+</body>
+
+</html>
